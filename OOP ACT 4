@@ -1,0 +1,94 @@
+# Advanced Class Relationships
+## Previous Activities
+[classAttrib](classAttributesMethods.md)
+[classRel]https://github.com/EF-Isaac/9magnesiumcs3/blob/main/OOP%20ACT%203
+## Existing System Description: too redundant when it came to the code
+## Inheritance Relationship: Condiments
+Parent:
+product serial code
+brand 
+taste
+Child:
+Ketchup
+IS-A
+Condiments
+Explanation: Ketchup is the most well known condiment almost used on every single meal or dish.
+## Inheritance UML
+https://drive.google.com/file/d/1VTAtlOxhv0qJxQQpplh4Eg8XN9ZigEUe/view?usp=sharing
+## Composition/Aggregation
+Relationship: IS-A relationship
+Explanation: because Ketchup is an example of a condmient
+## Advanced UML Diagram
+https://drive.google.com/file/d/1UIUBTYbBHHvY8UxlS0XIIqvNawYAx1r-/view?usp=sharing
+## Python Implementation
+class Nutrient:
+    def __init__(self, name, amount):
+        self.name = name
+        self.amount = amount
+
+    def show_nutrient(self):
+        print(self.name + ":", self.amount, "g")
+
+
+class Food:
+    def __init__(self, name):
+        self.name = name
+        self.nutrients = []
+
+    def add_nutrient(self, nutrient):
+        self.nutrients.append(nutrient)
+
+    def show_food(self):
+        print("\nFood:", self.name)
+        for nutrient in self.nutrients:
+            nutrient.show_nutrient()
+
+
+class Carbohydrate(Nutrient):
+    def __init__(self, amount):
+        super().__init__("Carbohydrates", amount)
+
+
+class Vitamin(Nutrient):
+    def __init__(self, name, amount):
+        super().__init__(name, amount)
+
+
+rice = Food("Rice")
+rice.add_nutrient(Carbohydrate(45))
+rice.add_nutrient(Vitamin("Vitamin B1", 0.2))
+
+banana = Food("Banana")
+banana.add_nutrient(Carbohydrate(23))
+banana.add_nutrient(Vitamin("Vitamin C", 8.7))
+
+potato = Food("Potato")
+potato.add_nutrient(Carbohydrate(17))
+potato.add_nutrient(Vitamin("Vitamin C", 19.7))
+
+rice.show_food()
+banana.show_food()
+potato.show_food()
+
+## Test Run
+Food: Rice
+Carbohydrates: 45 g
+Vitamin B1: 0.2 g
+
+Food: Banana
+Carbohydrates: 23 g
+Vitamin C: 8.7 g
+
+Food: Potato
+Carbohydrates: 17 g
+Vitamin C: 19.7 g
+## Object Diagram
+https://drive.google.com/file/d/17lCoXkllmeN7CwPC3zXLepUVJTNW_C92/view?usp=sharing
+
+## Reflection
+Answers:
+1. Because inheritence gives the child class a few similarities to the parent. Additionally, food nutrients is the father class of vitamins and carbohydrates because both are types of nutrients. To further add, these can all be found in food, making it all relatable to food nutrients.
+2. It gave the classes the same properties but just not the same structure. Nutrients could start off as the blue print for other classes making it less repetetive. Lastly, it can now focus on the application and not the replication.
+3. My HAS-A relationship is Aggregation because the two objects can still exist independently. For example, a Food has Nutrients, but the Nutrient object does not completely depend on the Food object to exist. This makes it completely different from Composition.
+4. it only shows how they interact in part 3. But in part 4, it has a stronger bond. This is utilized by the HAS-A relationship.
+5. I used the DRY principle by utilizing other functions instead of the same ones. For example, I used Association and Aggregation instad of one singular relationship. I also used the differences of the types of nutrients to give variety.
