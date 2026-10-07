@@ -1,0 +1,71 @@
+# Class Relationships: Association and Multiplicity
+## Previous Work
+[Part I - Classes and Objects]https://github.com/EF-Isaac/9magnesiumcs3/blob/main/OOP%20Act%201
+[Part II - Class Attributes and Methods]https://github.com/EF-Isaac/9magnesiumcs3/blob/main/OOP%20ACT%202
+## Existing Class
+Class: Sports player 
+Description: This provides the user with different inputs on a sport.
+## New Related Class
+Class: Food nutrients
+Description: tells how much nutrients you can have after intaking a certain type of food.
+## Association
+Relationship: Association (Dependency)
+Explanation: because the different nutrients a player has makes them more fit to play or excel in a sport.
+## Multiplicity
+Multiplicity: many-to-many
+Explanation: because we are relaying a player and their food diet directly 
+## UML Class Relationship Diagram
+https://drive.google.com/file/d/1M5kFJABUzf6CyCcxmC2-9cK9Dqq0Ji_1/view?usp=sharing
+## Python Implementation
+class Food:
+    def __init__(self, name, calories):
+        self.name = name
+        self.calories = calories
+        self.eaten_by = []  # Many players can eat this food
+
+    def __repr__(self):
+        return f"{self.name} ({self.calories} cal)"
+
+class SportsPlayer:
+    def __init__(self, name, sport):
+        self.name = name
+        self.sport = sport
+        self.foods = []  # Many foods can be eaten by this player
+        self.special_moves = 3
+        self.vacancy = True
+
+    def eat(self, food):
+        # Many-to-Many link
+        if food not in self.foods:
+            self.foods.append(food)
+        if self not in food.eaten_by:
+            food.eaten_by.append(self)
+        print(f"{self.name} eats {food.name}")
+
+    def Swing(self):
+        print(f"{self.name} swings!")
+
+    def blast(self):
+        print(f"{self.name} blasts!")
+
+    def MultiplayerAim(self, num_players):
+        print(f"{num_players} players aiming together!")
+
+    def show_diet(self):
+        print(f"\n{self.name}'s Diet: {self.foods}")
+
+# --- TEST RUN FOR MANY-TO-MANY ---
+
+# Create Foods (Food pool)
+rice = Food("Rice", 200)
+chicken = Food("Chicken",
+## Test Run
+![Relationship Test Run](images/relationshipTestRun.png)
+## Object Relationship Diagram
+![Object Relationship Diagram](images/objectRelationshipDiagram.png)
+## Analysis
+### What is the association between your two classes? Dependency 
+### What multiplicity did you choose and why? Many-to-many 
+### How did you implement the relationship in Python? By referring to a player as one whole
+### Why did you store an object reference instead of copying its data? To make it simpler 
+### If your relationship uses many, why is a list appropriate? So it can store more information and be counted as one.
