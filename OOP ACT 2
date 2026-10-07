@@ -1,0 +1,67 @@
+# Class Attributes and Methods
+## Previous Design
+Link to my previous activity:[https://github.com/EF-Isaac/9magnesiumcs3/blob/main/OOP%20Act%201]
+## Design Revision: No major changes were needed from my original design.
+## Visibility Decisions 
+| Attribute.          | Data Type| Visibility | Reason                                               |
+|Team members         |integers  |Private     |So that the opponents can't see the lineup            |
+|Schedule             |string    |Private     |So only team members will know their practice schedule|
+|Coach.               |string    |Public      |so other teams know who they are facing               |
+|Victories.           |string    |Public      |so the public know who will likely win the next match |
+## Updated UML Class Diagram
+https://drive.google.com/file/d/1g0oIuUY02kXDKqCvOASaYl9-KDUcpGUt/view?usp=drive_link
+## Python Implementation
+--- PUBLIC INFO ---
+Coach: Coach Santos
+Victories: 15 Wins - 2 Losses
+
+--- PRIVATE INFO (Opponent tries) ---
+Access Denied: Private information
+
+--- PRIVATE INFO (Team member tries) ---
+Members: [10, 23, 7, 15, 30], Schedule: Monday & Wednesday - 5PMclass Team:
+    def __init__(self, team_members, schedule, coach, victories):
+        self.__team_members = team_members  # Private: integers
+        self.__schedule = schedule          # Private: string
+        self.coach = coach                  # Public: string
+        self.victories = victories          # Public: string
+
+    # Getter for private attributes (for team use only)
+    def get_team_info(self, password):
+        if password == "team_only":
+            return f"Members: {self.__team_members}, Schedule: {self.__schedule}"
+        else:
+            return "Access Denied: Private information"
+
+    def display_public_info(self):
+        print(f"Coach: {self.coach}")
+        print(f"Victories: {self.victories}")
+# TEST RUN
+my_team = Team(
+    team_members = [10, 23, 7, 15, 30],
+    schedule = "Monday & Wednesday - 5PM",
+    coach = "Coach Santos",
+    victories = "15 Wins - 2 Losses"
+)
+
+# 1. Public Access Test (Anyone can see)
+print("--- PUBLIC INFO ---")
+my_team.display_public_info()
+
+# 2. Private Access Test (Opponent tries to see)
+print("\n--- PRIVATE INFO (Opponent tries) ---")
+print(my_team.get_team_info(password="opponent"))
+
+# 3. Private Access Test (Team member tries to see)
+print("\n--- PRIVATE INFO (Team member tries) ---")
+print(my_team.get_team_info(password="team_only"))
+## Object Diagram
+https://drive.google.com/file/d/196t4GgvdSowZLjpsV__Nh9ya50M8b-W8/view?usp=sharing
+
+## Analysis
+### Why did you make your chosen attribute private? So that the players have confidentiality with their strategies 
+### Which method changes the state of your object? None 
+### How did your two objects demonstrate that instances are independent? When I changed team_A.coach to "Coach REYES", team_B.coach stayed as "Coach Cruz".  This proves that each object has its own attributes. Changing one instance does NOT affect the other.
+### What is the difference between your class diagram and your object diagram? The object diagram is only enclosed in one square, while the class diagram is enclosed in two squares.
+
+
