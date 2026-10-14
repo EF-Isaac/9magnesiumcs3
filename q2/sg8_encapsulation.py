@@ -16,7 +16,7 @@ class Money(Bank):
         self._displayBalanceAndBranch() 
 
 
-obj = Money("676169", 670.00, "LandBank", f"{balans}" )
+obj = Money("676169", 670.00, "LandBank", "balans" )
 obj.displayDetails()
 
 balans = int(input("Update current balance: "))
