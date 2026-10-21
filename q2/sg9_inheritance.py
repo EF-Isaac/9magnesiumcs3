@@ -1,15 +1,72 @@
-class Publication:
-  def func1(self):
-    print("the author and title of the work is:.")
+class Publication: # Parent Class
+  def __init__(self, title: str, author: str):
+    self.__title = title # Private Attributes
+    self.__author = author
 
-class Book(Publication):
-  def func2(self):
-    print("number of pages in the book:.")
+  # Public Methods
+  
 
-class Magazine(Publication):
-  def func3(self):
-    print("issue number:.")
+  def set_author(self, author):
+    self.__author = author
 
-obj = Book()
-obj.func1()
-obj.func2()
+  def get_author(self):
+    return self.__author
+
+  def set_title(self, title):
+    self.__title = title
+
+  def get_title(self):
+    return self.__title
+
+  def display_info(self):
+    print(f"Title: {self.__title}")
+    print(f"Author: {self.__author}")
+
+class Book(Publication): # Child Class
+
+  def __init__(self, title: str, author: str, number_of_pages: int): 
+    super().__init__(title, author)
+    if number_of_pages <= 0:
+      print("The number of pages must be positive")
+      self.__number_of_pages = 0
+    else:
+      self.__number_of_pages = number_of_pages
+
+  def display_info(self):
+    super().display_info() 
+    print(f"Number of pages: {self.__number_of_pages}")
+    
+  def get_number_of_pages(self):
+    return self.__number_of_pages
+
+class Magazine(Publication): # Child Class
+  def __init__(self, title: str, author: str, issue_number: int):
+    super().__init__(title, author)
+    if issue_number <= 0:
+      print("The issue number must be positive")
+      self.__issue_number = 0
+    else:
+      self.__issue_number = issue_number
+
+  def display_info(self): 
+    super().display_info() 
+    print(f"Issue number: {self.__issue_number}")
+
+  def get_issue_number(self):
+    return self.__issue_number
+
+# Testing 
+
+pub1 = Publication("Romeo and Juliet","William Shakespeare")
+print("Publication Information:")
+pub1.display_info()
+print()
+
+book1 = Book("Taming of the shrew", "William Shakespeare", 620)
+print("Book Information:")
+book1.display_info() 
+print()
+
+mag1 = Magazine("Vogue", "Anna Wintour", 916)
+print("Magazine Information:")
+mag1.display_info()
